@@ -67,15 +67,9 @@ public class ProductoController {
         
         try {
             em.getTransaction().begin();
-            Query consulta = em.createNativeQuery("select * from producto");
-            List<Object[]> total = consulta.getResultList();
-            List<Integer> ids = total.stream().map(res -> new Integer((int) res[0])).collect(Collectors.toList());
-            
-            List<Producto> listaProductos = new ArrayList<>();
-            for (Integer id : ids) {
-                listaProductos.add(em.find(Producto.class, id));
-            }
-            
+            String consultac = "select p from Producto p";
+            Query consulta = em.createQuery(consultac,Producto.class);
+            List<Producto> listaProductos = consulta.getResultList();
             em.getTransaction().commit();
             return listaProductos;
         } catch (Exception e) {

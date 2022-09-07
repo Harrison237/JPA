@@ -18,10 +18,11 @@ import javax.persistence.Query;
  * @author Harrison
  */
 public class AdministradorController {
+
     private EntityManager entityManager() {
         return ConnectionDB.getInstance().getFactory().createEntityManager();
     }
-    
+
     public void create(Administrador row) {
         EntityManager em = this.entityManager();
         try {
@@ -33,7 +34,7 @@ public class AdministradorController {
             e.printStackTrace();
         }
     }
-    
+
     public void update(Administrador row) {
         EntityManager em = this.entityManager();
 
@@ -46,7 +47,7 @@ public class AdministradorController {
             e.printStackTrace();
         }
     }
-    
+
     public void delete(Administrador row) {
         EntityManager em = this.entityManager();
         try {
@@ -61,38 +62,33 @@ public class AdministradorController {
             e.printStackTrace();
         }
     }
-    
+
     public List<Administrador> index() {
         EntityManager em = this.entityManager();
-    
+
         try {
             em.getTransaction().begin();
-            Query consulta = em.createNativeQuery("select * from administrador");
-            List<Object []> total = consulta.getResultList();
-            List<Integer> adminsId = total.stream().map(res -> new Integer((int) res[0])).collect(Collectors.toList());
-            
-            List<Administrador> listaAdmins = new ArrayList<Administrador>();
-            for (Integer id : adminsId) {
-                listaAdmins.add(em.find(Administrador.class, id));
-            }
-            
+            String consultac = "select a from Administrador a";
+            Query consulta = em.createQuery(consultac, Administrador.class);
+            List<Administrador> lstAdministrador = consulta.getResultList();
+
             em.getTransaction().commit();
-            return listaAdmins;
+            return lstAdministrador;
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();
             return null;
         }
     }
-    
+
     public Administrador indexById(int id) {
         EntityManager em = this.entityManager();
-        
+
         try {
             em.getTransaction().begin();
             Administrador admin = em.find(Administrador.class, id);
             em.getTransaction().commit();
-            
+
             return admin;
         } catch (Exception e) {
             em.getTransaction().rollback();

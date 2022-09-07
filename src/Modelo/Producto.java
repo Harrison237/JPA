@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Harrison
  */
-@Entity
+@Entity(name = "Producto")
 @Table(name = "producto")
 @XmlRootElement
 @NamedQueries({
@@ -66,6 +66,15 @@ public class Producto implements Serializable {
     private Referencia idReferencia;
 
     public Producto() {
+    }
+
+    public Producto(String nombre, Long tamaño, String color, Long precio, String descripcion, Referencia idReferencia) {
+        this.nombre = nombre;
+        this.tamaño = tamaño;
+        this.color = color;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.idReferencia = idReferencia;
     }
 
     public Producto(Integer id) {

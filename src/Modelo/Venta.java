@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Harrison
  */
-@Entity
+@Entity(name = "Venta")
 @Table(name = "venta")
 @XmlRootElement
 @NamedQueries({
@@ -53,6 +53,12 @@ public class Venta implements Serializable {
     private Producto idProducto;
 
     public Venta() {
+    }
+
+    public Venta(Date fechaVenta, String descripcion, Producto idProducto) {
+        this.fechaVenta = fechaVenta;
+        this.descripcion = descripcion;
+        this.idProducto = idProducto;
     }
 
     public Venta(Integer id) {

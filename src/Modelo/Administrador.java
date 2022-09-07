@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Harrison
  */
-@Entity
+@Entity(name = "Administrador")
 @Table(name = "administrador")
 @XmlRootElement
 @NamedQueries({

@@ -66,19 +66,14 @@ public class UsuarioController {
 
         try {
             em.getTransaction().begin();
-            Query consulta = em.createNativeQuery("select * from usuario");
-            List<Object[]> total = consulta.getResultList();
-
-            List<Usuario> listaUsuarios = total.stream().map(res -> new Usuario(
-                    (int) res[0], (String) res[1], (String) res[2])
-            ).collect(Collectors.toList());
-            
+            String consultac = "select u from Usuario u";
+            Query consulta = em.createQuery(consultac,Usuario.class);
+            List<Usuario> listaUsuario = consulta.getResultList();
             em.getTransaction().commit();
-            return listaUsuarios;
+            return listaUsuario;
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();
-            
             return null;
         }
     }

@@ -66,19 +66,14 @@ public class TiendaController {
         
         try {
             em.getTransaction().begin();
-            Query consulta = em.createNativeQuery("select * from tienda");
-            List<Object[]> total = consulta.getResultList();
-            
-            List<Tienda> listaTiendas = total.stream().map(res -> new Tienda(
-                    (int) res[0], (String) res[1])
-            ).collect(Collectors.toList());
-            
+            String consultac = "select t from Tienda t";
+            Query consulta = em.createQuery(consultac,Tienda.class);
+            List<Tienda> listaTienda = consulta.getResultList();
             em.getTransaction().commit();
-            return listaTiendas;
+            return listaTienda;
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();
-            
             return null;
         }
     }

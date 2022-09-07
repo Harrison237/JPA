@@ -63,21 +63,17 @@ public class ReferenciaController {
     
     public List<Referencia> index() {
         EntityManager em = this.entityManager();
+        
         try {
             em.getTransaction().begin();
-            Query consulta = em.createNativeQuery("select * from referencia");
-            List<Object[]> total = consulta.getResultList();
-            
-            List<Referencia> listaReferencias = total.stream().map(res -> new Referencia(
-                    (int) res[0], (String) res[1])
-            ).collect(Collectors.toList());
-            
+            String consultac = "select r from Referencia r";
+            Query consulta = em.createQuery(consultac,Referencia.class);
+            List<Referencia> listaReferencia = consulta.getResultList();
             em.getTransaction().commit();
-            return listaReferencias;
+            return listaReferencia;
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();
-            
             return null;
         }
     }

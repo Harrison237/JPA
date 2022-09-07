@@ -67,17 +67,11 @@ public class SucursalController {
     
         try {
             em.getTransaction().begin();
-            Query consulta = em.createNativeQuery("select * from sucursal");
-            List<Object []> total = consulta.getResultList();
-            List<Integer> sucursalesId = total.stream().map(res -> new Integer((int) res[0])).collect(Collectors.toList());
-            
-            List<Sucursal> listaSucursales = new ArrayList<Sucursal>();
-            for (Integer id : sucursalesId) {
-                listaSucursales.add(em.find(Sucursal.class, id));
-            }
-            
+            String consultac = "select s from Sucursal s";
+            Query consulta = em.createQuery(consultac,Sucursal.class);
+            List<Sucursal> listaSucursal = consulta.getResultList();
             em.getTransaction().commit();
-            return listaSucursales;
+            return listaSucursal;
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();

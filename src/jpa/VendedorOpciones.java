@@ -5,47 +5,40 @@
  */
 package jpa;
 
-import Controlador.AdministradorController;
-import Controlador.TiendaController;
+import Controlador.SucursalController;
 import Controlador.UsuarioController;
-import Modelo.Administrador;
-import Modelo.Tienda;
+import Controlador.VendedorController;
+import Modelo.Sucursal;
 import Modelo.Usuario;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import Modelo.Vendedor;
 import java.util.List;
 import java.util.Scanner;
-import com.google.gson.Gson;
-import java.util.ArrayList;
 
 /**
  *
  * @author Harrison
  */
-public class AdministradorOpciones {
-
+public class VendedorOpciones {
     private String nombre;
     private String apellido;
     private String cedula;
     private String telefono;
-    private String nacimientoCad;
-    private Date nacimiento;
     private Integer idUsuario;
-    private Integer idTienda;
-    private AdministradorController adminControl = new AdministradorController();
+    private Integer idSucursal;
+    private VendedorController vendedorControl = new VendedorController();
     ;
 
     private UsuarioController productoControl;
-    private TiendaController shopControl;
+    private SucursalController sucursalControl;
     private Usuario usuarioAsociado;
-    private Tienda tiendaAsociada;
+    private Sucursal sucursalAsociada;
 
     public boolean init() {
         Scanner ent = new Scanner(System.in);
         this.productoControl = new UsuarioController();
-        this.shopControl = new TiendaController();
+        this.sucursalControl = new SucursalController();
         this.usuarioAsociado = new Usuario();
-        this.tiendaAsociada = new Tienda();
+        this.sucursalAsociada = new Sucursal();
 
         try {
             System.out.print("Ingrese el nombre: ");
@@ -56,12 +49,10 @@ public class AdministradorOpciones {
             this.cedula = ent.next();
             System.out.print("Ingrese el teléfono: ");
             this.telefono = ent.next();
-            System.out.print("Ingrese una fecha con el formato dd/MM/yyyy: ");
-            this.nacimientoCad = ent.next();
             System.out.print("Ingrese el Id del usuario asociado: ");
             this.idUsuario = ent.nextInt();
-            System.out.print("Ingrese el Id de la tienda asociada: ");
-            this.idTienda = ent.nextInt();
+            System.out.print("Ingrese el Id de la Sucursal asociada: ");
+            this.idSucursal = ent.nextInt();
 
             if (this.nombre.equals("n")) {
                 this.nombre = null;
@@ -75,17 +66,6 @@ public class AdministradorOpciones {
             if (this.telefono.equals("n")) {
                 this.telefono = null;
             }
-            if (this.nacimientoCad.equals("n")) {
-                this.nacimiento = null;
-            } else {
-                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                try {
-                    this.nacimiento = formato.parse(this.nacimientoCad);
-                } catch (Exception e) {
-                    System.out.println("Formato de fecha inválido.");
-                    return true;
-                }
-            }
             if (this.idUsuario == 0) {
                 this.idUsuario = null;
                 this.usuarioAsociado = null;
@@ -97,14 +77,14 @@ public class AdministradorOpciones {
                     return true;
                 }
             }
-            if (this.idTienda == 0) {
-                this.idTienda = null;
-                this.tiendaAsociada = null;
+            if (this.idSucursal == 0) {
+                this.idSucursal = null;
+                this.sucursalAsociada = null;
             } else {
                 try {
-                    tiendaAsociada = shopControl.indexById(this.idTienda);
+                    sucursalAsociada = sucursalControl.indexById(this.idSucursal);
                 } catch (Exception e) {
-                    System.out.println("No se encontró una tienda con el Id ingresado.");
+                    System.out.println("No se encontró una Sucursal con el Id ingresado.");
                     return true;
                 }
             }
@@ -116,47 +96,45 @@ public class AdministradorOpciones {
         return false;
     }
 
-    public void crearAdministrador() {
-        Administrador nuevo = new Administrador(this.nombre, this.apellido, this.cedula, this.telefono, this.nacimiento,
-                this.tiendaAsociada, this.usuarioAsociado);
+    public void crearVendedor() {
+        Vendedor nuevo = new Vendedor(this.nombre, this.apellido, this.cedula, this.telefono,
+                this.sucursalAsociada, this.usuarioAsociado);
 
-        this.adminControl.create(nuevo);
+        this.vendedorControl.create(nuevo);
     }
 
     public void todos() {
-        List<Administrador> listaAdmins = this.adminControl.index();
+        List<Vendedor> listaVendedores = this.vendedorControl.index();
 
-        for (Administrador ver : listaAdmins) {
+        for (Vendedor ver : listaVendedores) {
             System.out.println("ID: " + ver.getId()
                     + "\nNombre: " + ver.getNombre()
                     + "\nApellido: " + ver.getApellido()
                     + "\nCedula: " + ver.getCedula()
                     + "\nTelefono: " + ver.getTelefono()
-                    + "\nNacimiento: " + ver.getNacimiento()
                     + "\nUsuario: " + ver.getIdUsuario().getCorreo()
-                    + "\nTienda: " + ver.getIdTienda().getNombre() + "\n");
+                    + "\nSucursal: " + ver.getIdSucursal().getNombre() + "\n");
         }
     }
 
     public void porId(Integer id) {
-        Administrador mostrar = this.adminControl.indexById(id);
+        Vendedor mostrar = this.vendedorControl.indexById(id);
 
         if (mostrar == null) {
-            System.out.println("No se encontró ningún administrador.");
+            System.out.println("No se encontró ningún Vendedor.");
         } else {
             System.out.println("ID: " + mostrar.getId()
                     + "\nNombre: " + mostrar.getNombre()
                     + "\nApellido: " + mostrar.getApellido()
                     + "\nCedula: " + mostrar.getCedula()
                     + "\nTelefono: " + mostrar.getTelefono()
-                    + "\nNacimiento: " + mostrar.getNacimiento()
                     + "\nUsuario: " + mostrar.getIdUsuario().getCorreo()
-                    + "\nTienda: " + mostrar.getIdTienda().getNombre() + "\n");
+                    + "\nSucursal: " + mostrar.getIdSucursal().getNombre() + "\n");
         }
     }
 
     public void actualizar(Integer id) {
-        Administrador actualizado = this.adminControl.indexById(id);
+        Vendedor actualizado = this.vendedorControl.indexById(id);
 
         if (!(this.nombre == null)) {
             actualizado.setNombre(this.nombre);
@@ -170,21 +148,18 @@ public class AdministradorOpciones {
         if (!(this.telefono == null)) {
             actualizado.setTelefono(this.telefono);
         }
-        if (!(this.nacimiento == null)) {
-            actualizado.setNacimiento(this.nacimiento);
-        }
         if (!(this.usuarioAsociado == null)) {
             actualizado.setIdUsuario(this.usuarioAsociado);
         }
-        if (!(this.tiendaAsociada == null)) {
-            actualizado.setIdTienda(this.tiendaAsociada);
+        if (!(this.sucursalAsociada == null)) {
+            actualizado.setIdSucursal(this.sucursalAsociada);
         }
 
-        this.adminControl.update(actualizado);
+        this.vendedorControl.update(actualizado);
     }
 
     public void eliminar(Integer id) {
-        this.adminControl.delete(this.adminControl.indexById(id));
+        this.vendedorControl.delete(this.vendedorControl.indexById(id));
     }
 
     public void flush() {
@@ -192,11 +167,13 @@ public class AdministradorOpciones {
         this.apellido = null;
         this.cedula = null;
         this.telefono = null;
-        this.nacimiento = null;
-        this.nacimientoCad = null;
         this.idUsuario = null;
-        this.idTienda = null;
+        this.idSucursal = null;
+        this.productoControl = null;
+        this.sucursalControl = null;
         this.usuarioAsociado = null;
-        this.tiendaAsociada = null;
+        this.sucursalAsociada = null;
     }
+
+    
 }

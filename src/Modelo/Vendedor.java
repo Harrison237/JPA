@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Harrison
  */
-@Entity
+@Entity(name = "Vendedor")
 @Table(name = "vendedor")
 @XmlRootElement
 @NamedQueries({
@@ -63,6 +63,15 @@ public class Vendedor implements Serializable {
     private List<Historial> historialList;
 
     public Vendedor() {
+    }
+
+    public Vendedor(String nombre, String apellido, String cedula, String telefono, Sucursal idSucursal, Usuario idUsuario) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.telefono = telefono;
+        this.idSucursal = idSucursal;
+        this.idUsuario = idUsuario;
     }
 
     public Vendedor(Integer id) {

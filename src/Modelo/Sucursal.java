@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Harrison
  */
-@Entity
+@Entity(name = "Sucursal")
 @Table(name = "sucursal")
 @XmlRootElement
 @NamedQueries({
@@ -61,6 +61,12 @@ public class Sucursal implements Serializable {
     private Tienda idTienda;
 
     public Sucursal() {
+    }
+
+    public Sucursal(String nombre, String direccion, Tienda idTienda) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.idTienda = idTienda;
     }
 
     public Sucursal(Integer id) {

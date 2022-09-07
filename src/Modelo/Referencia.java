@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Harrison
  */
-@Entity
+@Entity(name = "Referencia")
 @Table(name = "referencia")
 @XmlRootElement
 @NamedQueries({
@@ -46,6 +46,10 @@ public class Referencia implements Serializable {
     private List<Producto> productoList;
 
     public Referencia() {
+    }
+
+    public Referencia(String ref) {
+        this.ref = ref;
     }
 
     public Referencia(Integer id, String ref) {

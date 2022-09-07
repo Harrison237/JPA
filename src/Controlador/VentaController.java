@@ -67,17 +67,11 @@ public class VentaController {
     
         try {
             em.getTransaction().begin();
-            Query consulta = em.createNativeQuery("select * from venta");
-            List<Object []> total = consulta.getResultList();
-            List<Integer> ventasId = total.stream().map(res -> new Integer((int) res[0])).collect(Collectors.toList());
-            
-            List<Venta> listaVentas = new ArrayList<>();
-            for (Integer id : ventasId) {
-                listaVentas.add(em.find(Venta.class, id));
-            }
-            
+            String consultac = "select v from Venta v";
+            Query consulta = em.createQuery(consultac,Venta.class);
+            List<Venta> listaVenta = consulta.getResultList();
             em.getTransaction().commit();
-            return listaVentas;
+            return listaVenta;
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();

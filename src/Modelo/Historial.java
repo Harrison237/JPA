@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Harrison
  */
-@Entity
+@Entity(name="historial")
 @Table(name = "historial")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Historial.findAll", query = "SELECT h FROM Historial h")
-    , @NamedQuery(name = "Historial.findById", query = "SELECT h FROM Historial h WHERE h.id = :id")
-    , @NamedQuery(name = "Historial.findByLogin", query = "SELECT h FROM Historial h WHERE h.login = :login")
-    , @NamedQuery(name = "Historial.findByLogout", query = "SELECT h FROM Historial h WHERE h.logout = :logout")})
+    @NamedQuery(name = "Historial.findAll", query = "SELECT h FROM historial h")
+    , @NamedQuery(name = "Historial.findById", query = "SELECT h FROM historial h WHERE h.id = :id")
+    , @NamedQuery(name = "Historial.findByLogin", query = "SELECT h FROM historial h WHERE h.login = :login")
+    , @NamedQuery(name = "Historial.findByLogout", query = "SELECT h FROM historial h WHERE h.logout = :logout")})
 public class Historial implements Serializable {
 
     private static final long serialVersionUID = 1L;

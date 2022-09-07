@@ -4,8 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/jpa/JPA.java</file>
-            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/jpa/AdministradorOpciones.java</file>
-            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Controlador/AdministradorController.java</file>
+            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Modelo/Referencia.java</file>
+            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Modelo/Venta.java</file>
+            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Modelo/Vendedor.java</file>
+            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Modelo/Producto.java</file>
+            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Modelo/Tienda.java</file>
+            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Modelo/Administrador.java</file>
+            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Modelo/Usuario.java</file>
+            <file>file:/C:/Users/Harrison/Documents/NetBeansProjects/JPA/src/Modelo/Sucursal.java</file>
         </group>
     </open-files>
 </project-private>

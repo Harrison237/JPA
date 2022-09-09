@@ -86,11 +86,13 @@ public class HistorialOpciones {
     
     public void todos() {
         List<Historial> listaHistoriales = this.historyControl.index();
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     
         for(Historial ver : listaHistoriales) {
             System.out.println("ID: "+ver.getId()
-                    + "\nLogin: "+ver.getLogin()
-                    + "\nLogout: "+ver.getLogout()
+                    + "\nLogin: "+formato.format(ver.getLogin())
+                    + "\nLogout: "+formato.format(ver.getLogout())
                     + "\nVendedor: "+ver.getIdVendedor().getNombre()+"\n");
         }
     }
@@ -98,12 +100,14 @@ public class HistorialOpciones {
     public void porId(Integer id) {
         Historial mostrar = this.historyControl.indexById(id);
         
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
         if(mostrar == null) {
             System.out.println("No se encontró el historial");
         } else {
             System.out.println("ID: "+mostrar.getId()
-                    + "\nLogin: "+mostrar.getLogin()
-                    + "\nLogout: "+mostrar.getLogout()
+                    + "\nLogin: "+formato.format(mostrar.getLogin())
+                    + "\nLogout: "+formato.format(mostrar.getLogout())
                     + "\nVendedor: "+mostrar.getIdVendedor().getNombre()+"\n");
         }
     }

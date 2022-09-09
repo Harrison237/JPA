@@ -82,23 +82,28 @@ public class VentaOpciones {
     public void todos() {
         List<Venta> listaAdmins = this.ventaControl.index();
 
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        
         for (Venta ver : listaAdmins) {
             System.out.println("ID: " + ver.getId()
-                    + "\nfechaVenta: " + ver.getFechaVenta()
-                    + "\nDescripcion: " + ver.getDescripcion()
+                    + "\nfechaVenta: " + formato.format(ver.getFechaVenta())
+                    + "\nDescripcion: " + formato.format(ver.getDescripcion())
                     + "\nProducto: " + ver.getIdProducto().getNombre() + "\n");
         }
     }
 
     public void porId(Integer id) {
         Venta mostrar = this.ventaControl.indexById(id);
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         if (mostrar == null) {
             System.out.println("No se encontró ningún Venta.");
         } else {
             System.out.println("ID: " + mostrar.getId()
-                    + "\nDescripcion: " + mostrar.getDescripcion()
-                    + "\nfechaVenta: " + mostrar.getFechaVenta()
+                    + "\nDescripcion: " + formato.format(mostrar.getFechaVenta())
+                    + "\nDescripcion: " + formato.format(mostrar.getDescripcion())
                     + "\nProducto: " + mostrar.getIdProducto().getNombre() + "\n");
         }
     }

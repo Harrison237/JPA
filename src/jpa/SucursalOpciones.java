@@ -28,7 +28,7 @@ public class SucursalOpciones {
     public boolean init() {
         Scanner ent = new Scanner(System.in);
         this.tiendaControl = new TiendaController();
-
+        
         try {
             System.out.print("Ingrese el nombre de la sucursal: ");
             this.nombre = ent.next();

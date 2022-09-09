@@ -5,10 +5,6 @@
  */
 package jpa;
 
-import Controlador.AdministradorController;
-import Controlador.UsuarioController;
-import Modelo.Administrador;
-import Modelo.Usuario;
 import java.util.Scanner;
 
 public class JPA {
@@ -16,11 +12,6 @@ public class JPA {
     public static void main(String[] args) {
         Scanner ent = new Scanner(System.in);
         Integer claseOpc = null;
-
-        Administrador nuevo = new Administrador();
-
-        nuevo.setNombre("kkkkkk");
-        nuevo.setApellido("aslkdf");
 
         do {
             System.out.println("Seleccione la clase que quiere modificar: "
